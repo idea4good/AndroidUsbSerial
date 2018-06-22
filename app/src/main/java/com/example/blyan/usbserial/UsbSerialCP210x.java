@@ -11,7 +11,7 @@ import android.hardware.usb.UsbManager;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class UsbSerialCP2102 {
+public class UsbSerialCP210x {
     public String connect(UsbManager manager, PendingIntent permissionIntent, UsbReadCallback callback){
         this.callback = callback;
 

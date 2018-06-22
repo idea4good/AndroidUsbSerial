@@ -37,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onReceive(byte[] data, int length) {
                         log += "received: " + String.valueOf(length) + " bytes\n";
+                        for (int i = 0; i < length; i++){
+                            log += String.format("%02x", data[i]) + ", ";
+                        }
+                        log += "\n";
                         runOnUiThread(new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -52,9 +56,7 @@ public class MainActivity extends AppCompatActivity {
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                byte[] data = new byte[] {(byte)'H', 'e', 'l', 'l', 'o', ' ',
-                                                'f', 'r', 'o', 'm', ' ',
-                                                'A', 'n', 'd', 'r', 'o', 'i', 'd'};
+                byte[] data = new byte[] {0x1, 0x2, 0x3, (byte)0xfd, (byte)0xfe, (byte)0xff};
                 log += "send: " + cp2102.send(data) + "\n";
                 textView.setText(log);
             }
@@ -86,6 +88,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView;
     private UsbManager manager;
     private PendingIntent permissionIntent;
-    private com.example.blyan.usbserial.UsbSerialCP2102 cp2102 = new com.example.blyan.usbserial.UsbSerialCP2102();
+    private UsbSerialCP210x cp2102 = new UsbSerialCP210x();
     private String log = "";
 }
