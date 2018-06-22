@@ -91,6 +91,7 @@ public class UsbSerialCP210x {
     public void releaseDevice(){
         connection.releaseInterface(usbInterface);
         connection.close();
+        connection = null;
         usbInterface = null;
     }
 
